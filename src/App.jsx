@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
-export default function App() {
-  const [status, setStatus] = useState("checking");
+function App() {
+  const [status, setStatus] = useState("Checking API...");
 
   useEffect(() => {
-    fetch(`${API_URL}/health`)
-      .then(res => res.json())
-      .then(data => setStatus(data.status))
-      .catch(() => setStatus("error"));
+    fetch("https://sleek-sands-api0.onrender.com/health")
+      .then(res => res.text())
+      .then(data => setStatus(data))
+      .catch(() => setStatus("API not reachable"));
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Sleek Sands Web</h1>
-      <p>API status: {status}</p>
+    <div style={{ padding: 20, fontFamily: "Arial" }}>
+      <h1>Sleek Sands</h1>
+      <p>Backend status:</p>
+      <strong>{status}</strong>
     </div>
   );
 }
+
+export default App;
