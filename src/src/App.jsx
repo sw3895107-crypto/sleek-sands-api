@@ -4,7 +4,7 @@ function App() {
   const [status, setStatus] = useState("Checking API...");
 
   useEffect(() => {
-    fetch("https://sleek-sands-api-1.onrender.com/health")
+    fetch("https://sleek-sands-api0.onrender.com/health")
       .then(res => res.text())
       .then(data => setStatus(data))
       .catch(() => setStatus("API not reachable"));
