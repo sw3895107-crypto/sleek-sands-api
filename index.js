@@ -1,16 +1,31 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
 const app = express();
-
-app.use(cors({ origin: "*" }));
+app.use(cors());
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello from Render");
+});
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("API running on port", PORT);
+app.post("/auth/login", (req, res) => {
+  const { email, password } = req.body;
+
+  res.json({
+    token: "dev-token",
+    user: {
+      id: 1,
+      email,
+      role: "admin"
+    }
+  });
+});
+
+app.listen(10000, () => {
+  console.log("API running on port 10000");
 });
